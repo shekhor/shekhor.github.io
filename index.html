@@ -19,6 +19,15 @@
             text-align: center;
             padding: 20px;
         }
+        header p {
+            margin: 5px 0;
+        }
+        .header-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
         header a {
             color: #ffcc00;
             text-decoration: none;
@@ -47,16 +56,22 @@
             header {
                 padding: 10px;
             }
+            .header-info {
+                flex-direction: column;
+                align-items: center;
+            }
         }
     </style>
 </head>
 <body>
     <header>
         <h1>Shekhor Chanda</h1>
-        <p>Email: <a href="mailto:Shekhor15@gmail.com">Shekhor15@gmail.com</a></p>
-        <p>LinkedIn: <a href="https://linkedin.com/in/shekhor94" target="_blank">linkedin.com/in/shekhor94</a></p>
-        <p>GitHub: <a href="https://github.com/shekhor" target="_blank">github.com/shekhor</a></p>
-        <p>Phone: +1 431-668-4549</p>
+        <div class="header-info">
+            <p>Email: <a href="mailto:Shekhor15@gmail.com">Shekhor15@gmail.com</a></p>
+            <p>LinkedIn: <a href="https://linkedin.com/in/shekhor94" target="_blank">linkedin.com/in/shekhor94</a></p>
+            <p>GitHub: <a href="https://github.com/shekhor" target="_blank">github.com/shekhor</a></p>
+            <p>Phone: +1 431-668-4549</p>
+        </div>
     </header>
     
     <section id="summary">
