@@ -3,136 +3,782 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shekhor Chanda - Portfolio</title>
+    <meta name="description" content="Shekhor Chanda — Programmer Analyst building web and enterprise applications with .NET, React, Azure, and full-stack technologies.">
+    <title>Shekhor Chanda — Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* General Styles */
-        body {
-            font-family: Arial, sans-serif;
+        :root {
+            --ink: #14212b;
+            --ink-soft: #3a4a56;
+            --muted: #5c6b76;
+            --paper: #f3f0e8;
+            --paper-2: #e8e4d8;
+            --line: #cfc9b8;
+            --accent: #0f6e56;
+            --accent-deep: #0a4f3d;
+            --surface: rgba(255, 252, 245, 0.72);
+            --max: 68rem;
+            --ease: cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
         }
-        header {
-            background: #333;
-            color: #fff;
-            text-align: center;
-            padding: 20px;
+
+        html {
+            scroll-behavior: smooth;
         }
-        .header-info {
+
+        body {
+            font-family: "Manrope", sans-serif;
+            color: var(--ink);
+            background:
+                radial-gradient(ellipse 80% 50% at 10% -10%, rgba(15, 110, 86, 0.14), transparent 55%),
+                radial-gradient(ellipse 60% 40% at 100% 0%, rgba(20, 33, 43, 0.08), transparent 50%),
+                linear-gradient(180deg, #efebe0 0%, var(--paper) 35%, #ebe6da 100%);
+            background-attachment: fixed;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        a {
+            color: var(--accent-deep);
+            text-decoration-thickness: 1px;
+            text-underline-offset: 0.18em;
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            color: var(--accent);
+        }
+
+        .wrap {
+            width: min(100% - 2.5rem, var(--max));
+            margin-inline: auto;
+        }
+
+        /* —— Nav —— */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            backdrop-filter: blur(12px);
+            background: rgba(243, 240, 232, 0.78);
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s ease, background 0.3s ease;
+        }
+
+        .nav.is-scrolled {
+            border-bottom-color: var(--line);
+        }
+
+        .nav-inner {
             display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 0.9rem 0;
         }
-        header a {
-            color: #ffcc00;
+
+        .nav-brand {
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--ink);
             text-decoration: none;
         }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem 1.1rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--ink-soft);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* —— Hero —— */
+        .hero {
+            min-height: calc(100vh - 3.5rem);
+            display: grid;
+            align-items: end;
+            padding: 4rem 0 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 8% -10% auto auto;
+            width: min(42vw, 28rem);
+            height: min(42vw, 28rem);
+            border-radius: 50%;
+            background:
+                radial-gradient(circle at 35% 35%, rgba(15, 110, 86, 0.22), transparent 55%),
+                radial-gradient(circle at 70% 70%, rgba(20, 33, 43, 0.12), transparent 60%);
+            animation: drift 14s var(--ease) infinite alternate;
+            pointer-events: none;
+        }
+
+        .hero-grid {
+            display: grid;
+            gap: 2.5rem;
+            position: relative;
+        }
+
+        @media (min-width: 900px) {
+            .hero-grid {
+                grid-template-columns: 1.15fr 0.85fr;
+                align-items: end;
+                gap: 3rem;
+            }
+        }
+
+        .hero-copy {
+            opacity: 0;
+            transform: translateY(1.25rem);
+            animation: rise 0.9s var(--ease) 0.1s forwards;
+        }
+
+        .hero-name {
+            font-family: "Instrument Serif", Georgia, serif;
+            font-size: clamp(3.2rem, 9vw, 6.2rem);
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+            font-weight: 400;
+            margin-bottom: 1.25rem;
+        }
+
+        .hero-name em {
+            font-style: italic;
+            color: var(--accent-deep);
+        }
+
+        .hero-lead {
+            font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+            color: var(--ink-soft);
+            max-width: 34rem;
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+
+        .hero-sub {
+            color: var(--muted);
+            max-width: 34rem;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        .cta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8rem 1.25rem;
+            font: inherit;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border-radius: 0.35rem;
+            text-decoration: none;
+            transition: transform 0.2s var(--ease), background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: var(--ink);
+            color: #f7f4ec;
+            border: 1px solid var(--ink);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-deep);
+            border-color: var(--accent-deep);
+            color: #f7f4ec;
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--ink);
+            border: 1px solid var(--line);
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--accent);
+            color: var(--accent-deep);
+        }
+
+        .hero-panel {
+            opacity: 0;
+            transform: translateY(1.5rem);
+            animation: rise 1s var(--ease) 0.35s forwards;
+            border-top: 1px solid var(--line);
+            padding-top: 1.5rem;
+        }
+
+        .hero-meta {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .meta-item {
+            display: grid;
+            gap: 0.2rem;
+        }
+
+        .meta-label {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--muted);
+            font-weight: 600;
+        }
+
+        .meta-value {
+            font-size: 0.98rem;
+            color: var(--ink);
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .meta-value:hover {
+            color: var(--accent);
+        }
+
+        /* —— Sections —— */
         section {
-            width: 80%;
-            margin: 20px auto;
-            padding: 20px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            padding: 4.5rem 0;
+            border-top: 1px solid var(--line);
         }
-        h2 {
-            border-bottom: 2px solid #333;
-            padding-bottom: 5px;
+
+        .section-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 0.75rem;
         }
-        ul {
-            list-style-type: square;
+
+        .section-title {
+            font-family: "Instrument Serif", Georgia, serif;
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            margin-bottom: 1rem;
+            font-weight: 400;
         }
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            section {
-                width: 95%;
-                padding: 15px;
+
+        .section-intro {
+            color: var(--muted);
+            max-width: 40rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(1rem);
+            transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* —— About —— */
+        .about-text {
+            font-size: 1.1rem;
+            color: var(--ink-soft);
+            max-width: 46rem;
+        }
+
+        /* —— Experience —— */
+        .jobs {
+            display: grid;
+            gap: 2.75rem;
+        }
+
+        .job {
+            display: grid;
+            gap: 1rem;
+        }
+
+        @media (min-width: 800px) {
+            .job {
+                grid-template-columns: 14rem 1fr;
+                gap: 2rem;
             }
-            .header-info {
-                flex-direction: column;
-                align-items: center;
+        }
+
+        .job-side {
+            color: var(--muted);
+            font-size: 0.92rem;
+        }
+
+        .job-role {
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.2rem;
+            color: var(--ink);
+        }
+
+        .job-org a {
+            font-weight: 600;
+            text-decoration: none;
+            color: var(--accent-deep);
+        }
+
+        .job-org a:hover {
+            color: var(--accent);
+        }
+
+        .job-loc {
+            margin-top: 0.35rem;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .job-body ul {
+            list-style: none;
+            display: grid;
+            gap: 0.65rem;
+        }
+
+        .job-body li {
+            position: relative;
+            padding-left: 1rem;
+            color: var(--ink-soft);
+            font-size: 0.98rem;
+        }
+
+        .job-body li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.65em;
+            width: 0.35rem;
+            height: 0.35rem;
+            background: var(--accent);
+            border-radius: 1px;
+        }
+
+        .job-skills {
+            margin-top: 1.1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--line);
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+
+        .job-skills strong {
+            color: var(--ink-soft);
+            font-weight: 600;
+        }
+
+        /* —— Skills —— */
+        .skill-grid {
+            display: grid;
+            gap: 1.5rem 2rem;
+        }
+
+        @media (min-width: 700px) {
+            .skill-grid {
+                grid-template-columns: 1fr 1fr;
             }
+        }
+
+        .skill-block h3 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--muted);
+            margin-bottom: 0.45rem;
+            font-weight: 700;
+        }
+
+        .skill-block p {
+            color: var(--ink-soft);
+            font-size: 0.98rem;
+        }
+
+        /* —— Publications —— */
+        .pub-list {
+            list-style: none;
+            display: grid;
+            gap: 1.25rem;
+        }
+
+        .pub-list li {
+            padding-left: 1.1rem;
+            border-left: 2px solid var(--accent);
+            color: var(--ink-soft);
+        }
+
+        .pub-list strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+
+        .pub-venue {
+            display: block;
+            margin-top: 0.25rem;
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+
+        /* —— Education —— */
+        .edu-list {
+            display: grid;
+            gap: 1.75rem;
+        }
+
+        .edu-item h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .edu-item p {
+            color: var(--ink-soft);
+            margin-top: 0.2rem;
+        }
+
+        .edu-meta {
+            color: var(--muted);
+            font-size: 0.92rem;
+            margin-top: 0.35rem;
+        }
+
+        /* —— Footer —— */
+        footer {
+            border-top: 1px solid var(--line);
+            padding: 2.5rem 0 3rem;
+        }
+
+        .footer-inner {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 1rem;
+            color: var(--muted);
+            font-size: 0.92rem;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: var(--ink-soft);
+            font-weight: 500;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        @keyframes rise {
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        @keyframes drift {
+            from { transform: translate(0, 0) scale(1); }
+            to { transform: translate(-1.5rem, 1rem) scale(1.06); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .hero-copy,
+            .hero-panel,
+            .reveal {
+                opacity: 1;
+                transform: none;
+                animation: none;
+                transition: none;
+            }
+            .hero::before { animation: none; }
+            .btn:hover { transform: none; }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Shekhor Chanda</h1>
-        <div class="header-info">
-            <p>Email: <a href="mailto:Shekhor15@gmail.com">Shekhor15@gmail.com</a> | LinkedIn: <a href="https://linkedin.com/in/shekhor94" target="_blank">linkedin.com/in/shekhor94</a> | GitHub: <a href="https://github.com/shekhor" target="_blank">github.com/shekhor</a> | Phone: +1 431-668-4549</p>
+    <nav class="nav" id="nav">
+        <div class="wrap nav-inner">
+            <a class="nav-brand" href="#top">Shekhor Chanda</a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#publications">Publications</a></li>
+                <li><a href="#education">Education</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero wrap" id="top">
+        <div class="hero-grid">
+            <div class="hero-copy">
+                <h1 class="hero-name">Shekhor <em>Chanda</em></h1>
+                <p class="hero-lead">Programmer Analyst building web and enterprise systems with .NET, React, and Azure.</p>
+                <p class="hero-sub">Five years of experience delivering full-stack applications, APIs, cloud infrastructure, and cross-team solutions for public and private organizations.</p>
+                <div class="cta-row">
+                    <a class="btn btn-primary" href="mailto:Shekhor15@gmail.com">Email me</a>
+                    <a class="btn btn-ghost" href="https://www.linkedin.com/in/shekhor94/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    <a class="btn btn-ghost" href="https://github.com/shekhor" target="_blank" rel="noopener noreferrer">GitHub</a>
+                </div>
+            </div>
+            <aside class="hero-panel" aria-label="Contact details">
+                <div class="hero-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">Location</span>
+                        <span class="meta-value">Winnipeg, MB, Canada</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Email</span>
+                        <a class="meta-value" href="mailto:Shekhor15@gmail.com">Shekhor15@gmail.com</a>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Phone</span>
+                        <a class="meta-value" href="tel:+14316684549">+1 431-668-4549</a>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Currently</span>
+                        <span class="meta-value">City of Winnipeg · RoboGarden</span>
+                    </div>
+                </div>
+            </aside>
         </div>
     </header>
-    
-    <section id="summary">
-        <h2>Summary</h2>
-        <ul>
-            <li>Over 3 years of experience in software development and analysis, specializing in Java-based backend systems, web development, and cloud technologies.</li>
-            <li>Key contributor to the City of Winnipeg’s <a href="https://permitsonline.winnipeg.ca" target="_blank">permitsonline.winnipeg.ca</a> application, streamlining permit applications for businesses and residents.</li>
-            <li>Strong expertise in full stack development, RESTful APIs, SQL/PLSQL, and Agile SDLC practices.</li>
-            <li>Experienced instructor passionate about teaching JavaScript, Node.js, React, and full stack development principles.</li>
-        </ul>
-    </section>
-    
-    <section id="experience">
-        <h2>Work Experience</h2>
-        <h3>Programmer Analyst | City of Winnipeg</h3>
-        <p>Dec 2023 - Present</p>
-        <ul>
-            <li>Led the design and implementation of the <a href="https://permitsonline.winnipeg.ca" target="_blank">permitsonline.winnipeg.ca</a> application to digitize permit processes for the public and businesses.</li>
-            <li>Utilized JAVA, JSP, Spring, SQL, and PL/SQL to develop and maintain scalable web application components.</li>
-            <li>Developed an internal employee onboarding app using Power Apps, Power Automate, and SharePoint.</li>
-            <li>Maintained the AMANDA system for internal data workflows and administrative automation.</li>
-            <li>Practiced Agile methodologies with CI/CD pipelines, Selenium testing, and version control via Git/JIRA.</li>
-            <li>Provided cross-functional support and system troubleshooting using Remedy and service management tools.</li>
-        </ul>
-        
-        <h3>Software Engineer | Tiger IT Bangladesh Limited</h3>
-        <p>Oct 2018 - Mar 2021</p>
-        <ul>
-            <li>Designed back-end APIs using Spring, Spring Boot for web applications in an Agile environment.</li>
-            <li>Implemented security solutions using Spring Security, SSO Authentication, and OAuth 2.0.</li>
-            <li>Worked with RabbitMQ for internal messaging services.</li>
-        </ul>
-        
-        <h3>Software Development Instructor (Part-Time) | RoboGarden Inc.</h3>
-        <p>July 2023 - Present</p>
-        <ul>
-            <li>Delivering instruction on software development principles, including object-oriented programming, data structures, and full stack development best practices.</li>
-            <li>Developing curriculum, presentations, and interactive teaching plans.</li>
-            <li>Teaching modern technologies such as JavaScript, ReactJS, Node.js, and mobile development tools like React Native.</li>
-        </ul>
-    </section>
-    
-    <section id="skills">
-        <h2>Technical Skills</h2>
-        <ul>
-            <li>Programming: Java, Python, C++, C#, JavaScript, SQL, PL/SQL, PostgreSQL, MySQL</li>
-            <li>Web Development: Angular, ReactJS, Spring Boot, RESTful APIs, JSP</li>
-            <li>Frameworks & Tools: Hibernate, Apache Struts, EJB, YAML, log4j, Docker, Kubernetes, Jenkins, GIT, JIRA, Bitbucket, SVN</li>
-            <li>DevOps & Cloud: Azure, AWS, CI/CD, RabbitMQ, Apache Hive, Apache Hadoop</li>
-            <li>Databases: Oracle, SQL, PostgreSQL, MySQL</li>
-        </ul>
-    </section>
-    
-    <section id="education">
-        <h2>Education</h2>
-        <h3>University of Manitoba</h3>
-        <p>Master’s in Computer Science, CGPA 3.90 / 4.50</p>
-        <p>Jan 2021 – Apr 2023</p>
-        
-        <h3>American International University-Bangladesh (AIUB)</h3>
-        <p>Bachelor of Engineering in Computer Science and Engineering, CGPA 3.68 / 4.00</p>
-        <p>May 2014 – Aug 2018</p>
-    </section>
-    
-    <section id="publications">
-        <h2>Publications</h2>
-        <ul>
-            <li>Shekhor Chanda, Yang Wang. “Dynamic Transfer for Domain Adaptation in Crowd Counting” - MVA 2023.</li>
-            <li>Wu Yong, Shekhor Chanda, et al. “Few-Shot Learning of Compact Models via Task-Specific Meta Distillation” - WACV 2022.</li>
-        </ul>
-    </section>
+
+    <main>
+        <section id="about">
+            <div class="wrap reveal">
+                <p class="section-label">About</p>
+                <h2 class="section-title">Summary</h2>
+                <p class="about-text">
+                    Five years of experience developing and supporting web and enterprise applications using .NET, React, and full-stack technologies. Skilled in .NET, C#, React, SQL/PLSQL, REST/SOAP APIs, Azure, CI/CD pipelines, Terraform, and reporting solutions. Experienced in systems analysis, workflow documentation, and cross-team collaboration to deliver high-quality solutions.
+                </p>
+            </div>
+        </section>
+
+        <section id="experience">
+            <div class="wrap">
+                <p class="section-label reveal">Career</p>
+                <h2 class="section-title reveal">Work Experience</h2>
+                <p class="section-intro reveal">From enterprise permit systems and cloud infrastructure to teaching and research — roles that span delivery, analysis, and mentorship.</p>
+
+                <div class="jobs">
+                    <article class="job reveal">
+                        <div class="job-side">
+                            <p class="job-role">Programmer Analyst</p>
+                            <p class="job-org"><a href="https://www.winnipeg.ca" target="_blank" rel="noopener noreferrer">City of Winnipeg</a></p>
+                            <p class="job-loc">Winnipeg, MB · Dec 2023 – Present</p>
+                        </div>
+                        <div class="job-body">
+                            <ul>
+                                <li>Designed and developed a modern permit online application system using React and .NET, following SDLC best practices, system analysis principles, and enterprise architecture standards; implemented CI/CD pipelines with Azure DevOps and GitHub Actions.</li>
+                                <li>Provisioned cloud infrastructure on Microsoft Azure using Terraform, including App Services, configuration settings, and environment-based deployments.</li>
+                                <li>Performed systems analysis including requirement gathering, workflow documentation, process mapping, and technical specification development for cross-department projects.</li>
+                                <li>Developed and consumed RESTful APIs using JSON/XML, with API management, data mapping, authentication flows, and integration with internal systems; supported legacy SOAP interfaces when required.</li>
+                                <li>Maintained and enhanced enterprise data systems using Oracle, SQL Server, and PL/SQL, including data modeling, query optimization, validation, and report generation.</li>
+                                <li>Used SharePoint for document storage, workflow integration, and internal application support (lists, libraries, and permissions).</li>
+                                <li>Supported the AMANDA enterprise application including workflow updates, configuration changes, data fixes, and cross-team coordination.</li>
+                                <li>Applied SDLC, CI/CD, Agile, and DevOps methodologies; tested and debugged with Postman, Chrome DevTools, and internal tools.</li>
+                                <li>Collaborated with technical and non-technical stakeholders, prepared documentation, and communicated technical decisions clearly.</li>
+                            </ul>
+                            <p class="job-skills"><strong>Skills:</strong> .NET, React, C#, Oracle, SQL/PLSQL, SQL Server, RESTful APIs, Data Mapping, SOAP, JSON/XML, Azure, Azure DevOps, CI/CD, Terraform, Power BI, Crystal Reports, SharePoint, Agile, SDLC, Microservices</p>
+                        </div>
+                    </article>
+
+                    <article class="job reveal">
+                        <div class="job-side">
+                            <p class="job-role">Software Development Instructor</p>
+                            <p class="job-org"><a href="https://robogarden.ca/" target="_blank" rel="noopener noreferrer">RoboGarden Inc.</a></p>
+                            <p class="job-loc">Remote, Calgary · Jul 2023 – Present · Part-time</p>
+                        </div>
+                        <div class="job-body">
+                            <ul>
+                                <li>Teaching modern technologies and best practices in software development.</li>
+                                <li>Building curriculum, presentations, teaching plans, and supporting marketing activities.</li>
+                                <li>Performing quality control on new platforms and content development.</li>
+                            </ul>
+                            <p class="job-skills"><strong>Skills:</strong> HTML, CSS, JavaScript, Angular, Node.js, Ionic, SQL, RESTful APIs, block-based programming</p>
+                        </div>
+                    </article>
+
+                    <article class="job reveal">
+                        <div class="job-side">
+                            <p class="job-role">Software Engineer</p>
+                            <p class="job-org"><a href="https://www.tigerit.com/" target="_blank" rel="noopener noreferrer">Tiger IT Bangladesh Limited</a></p>
+                            <p class="job-loc">Dhaka, Bangladesh · Oct 2018 – Mar 2021</p>
+                        </div>
+                        <div class="job-body">
+                            <ul>
+                                <li>Designed back-end APIs using Spring and Spring Boot to develop automated web applications in an Agile environment.</li>
+                                <li>Performed systems analysis, design, development, and validation in a multi-platform networked environment.</li>
+                                <li>Worked on key verification tasks using the open-source SignServer project with HSM and JBoss.</li>
+                                <li>Managed relational databases and wrote complex SQL statements.</li>
+                                <li>Implemented security solutions using Spring Security, SSO, and OAuth 2.0 authentication.</li>
+                                <li>Implemented an internal messaging service using RabbitMQ.</li>
+                            </ul>
+                            <p class="job-skills"><strong>Skills:</strong> Java, RESTful APIs, Spring, Spring Boot, Apache Struts, Spring MVC, EJB, SQL, Angular, JavaScript, jQuery, YAML, Unit Testing, Linux, Git, JIRA, log4j, Docker, Kubernetes, Jenkins, Redis, AWS</p>
+                        </div>
+                    </article>
+
+                    <article class="job reveal">
+                        <div class="job-side">
+                            <p class="job-role">Graduate Research Assistant</p>
+                            <p class="job-org"><a href="http://www.cs.umanitoba.ca/~vision/" target="_blank" rel="noopener noreferrer">Computer Vision Lab</a></p>
+                            <p class="job-loc">University of Manitoba · Jan 2021 – Jun 2023</p>
+                        </div>
+                        <div class="job-body">
+                            <ul>
+                                <li><strong>Machine learning for image classification</strong> — adapting a deep learning model to recognize objects in a target domain without accessing internal information of the source model.</li>
+                                <li><strong>Dynamic deep learning for crowd counting</strong> — training a model that adapts dynamically to individual data samples in the target domain.</li>
+                            </ul>
+                            <p class="job-skills"><strong>Techniques:</strong> Machine Learning, Deep Learning, CUDA, Transfer Learning, Python, R, PyTorch, Scikit-learn, Pandas, Matplotlib, TensorFlow, Docker, Spark, Tableau, Power BI, Apache Hive, Apache Hadoop</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <div class="wrap reveal">
+                <p class="section-label">Toolkit</p>
+                <h2 class="section-title">Technical Skills</h2>
+                <p class="section-intro">Languages, frameworks, and platforms used across enterprise delivery, teaching, and research.</p>
+                <div class="skill-grid">
+                    <div class="skill-block">
+                        <h3>Core Languages</h3>
+                        <p>C, C++, Python, Java, C#</p>
+                    </div>
+                    <div class="skill-block">
+                        <h3>Query Languages</h3>
+                        <p>SQL, MySQL, PostgreSQL, PL/SQL, Oracle</p>
+                    </div>
+                    <div class="skill-block">
+                        <h3>Web Technologies</h3>
+                        <p>Angular, React, JSP, HTML, PHP, CSS, JavaScript, jQuery, AJAX, JSON, XML</p>
+                    </div>
+                    <div class="skill-block">
+                        <h3>Frameworks</h3>
+                        <p>.NET, Node.js, J2EE, Spring, Spring Boot, Hibernate</p>
+                    </div>
+                    <div class="skill-block">
+                        <h3>DevOps &amp; Cloud</h3>
+                        <p>Azure, Terraform, Docker, Kubernetes, CI/CD, Jenkins, RabbitMQ, Azure DevOps (Pipelines, Repos, Boards), AWS</p>
+                    </div>
+                    <div class="skill-block">
+                        <h3>Tools &amp; Platforms</h3>
+                        <p>Visual Studio, IntelliJ, Eclipse, Git, Bitbucket, SVN, Jira, Linux, Windows</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="publications">
+            <div class="wrap reveal">
+                <p class="section-label">Research</p>
+                <h2 class="section-title">Publications</h2>
+                <ul class="pub-list">
+                    <li>
+                        <strong>Shekhor Chanda, Yang Wang.</strong> “Dynamic Transfer for Domain Adaptation in Crowd Counting.”
+                        <span class="pub-venue">MVA, 2023</span>
+                    </li>
+                    <li>
+                        <strong>Wu Yong, Shekhor Chanda, Mehrdad Hosseinzadeh, Zhi Liu, and Yang Wang.</strong> “Few-Shot Learning of Compact Models via Task-Specific Meta Distillation.”
+                        <span class="pub-venue">WACV, 2022</span>
+                    </li>
+                    <li>
+                        <strong>Sentiment Extraction From Text Using Emotion Tagged Corpus.</strong>
+                        <span class="pub-venue">The 10th International Conference on Computing, Communication and Networking Technologies (ICCCNT), 2019</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="education">
+            <div class="wrap reveal">
+                <p class="section-label">Background</p>
+                <h2 class="section-title">Education</h2>
+                <div class="edu-list">
+                    <div class="edu-item">
+                        <h3>University of Manitoba</h3>
+                        <p>Master’s in Computer Science · CGPA 3.90 / 4.50</p>
+                        <p class="edu-meta">Winnipeg, Canada · Jan 2021 – Apr 2023</p>
+                    </div>
+                    <div class="edu-item">
+                        <h3>American International University-Bangladesh (AIUB)</h3>
+                        <p>Bachelor of Engineering in Computer Science and Engineering · CGPA 3.68 / 4.00</p>
+                        <p class="edu-meta">Dhaka, Bangladesh · May 2014 – Aug 2018</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="wrap footer-inner">
+            <p>© <span id="year"></span> Shekhor Chanda</p>
+            <div class="footer-links">
+                <a href="mailto:Shekhor15@gmail.com">Email</a>
+                <a href="https://www.linkedin.com/in/shekhor94/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a href="https://github.com/shekhor" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+
+        const nav = document.getElementById("nav");
+        const onScroll = () => nav.classList.toggle("is-scrolled", window.scrollY > 8);
+        onScroll();
+        window.addEventListener("scroll", onScroll, { passive: true });
+
+        const reveals = document.querySelectorAll(".reveal");
+        if ("IntersectionObserver" in window) {
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("is-visible");
+                        io.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+            reveals.forEach((el) => io.observe(el));
+        } else {
+            reveals.forEach((el) => el.classList.add("is-visible"));
+        }
+    </script>
 </body>
 </html>
